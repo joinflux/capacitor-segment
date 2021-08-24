@@ -1,5 +1,5 @@
 {
-  "name": "capacitor-segment",
+  "name": "@joinflux/capacitor-segment",
   "version": "0.0.1",
   "description": "A Capacitor plugin for Segment analytics",
   "main": "dist/plugin.cjs.js",
@@ -51,6 +51,7 @@
     "@ionic/eslint-config": "^0.3.0",
     "@ionic/prettier-config": "^1.0.1",
     "@ionic/swiftlint-config": "^1.1.2",
+    "@types/analytics-node": "^3.1.5",
     "eslint": "^7.11.0",
     "prettier": "~2.2.0",
     "prettier-plugin-java": "~1.0.0",
@@ -74,5 +75,8 @@
     "android": {
       "src": "android"
     }
+  },
+  "dependencies": {
+    "analytics-node": "^5.0.0"
   }
 }
