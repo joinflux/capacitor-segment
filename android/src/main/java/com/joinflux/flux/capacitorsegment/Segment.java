@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-public class CapacitorSegment {
+public class Segment {
     private static final String PLUGIN_TAG = "CapacitorSegment";
     public Analytics analytics;
 

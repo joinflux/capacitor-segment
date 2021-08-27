@@ -1,8 +1,7 @@
 import Foundation
-import Capacitor
 import Analytics
 
-@objc public class CapacitorSegment: NSObject {
+@objc public class Segment: NSObject {
     @objc public func initialize(key: String, trackLifecycle: Bool) {
         let config: SEGAnalyticsConfiguration = SEGAnalyticsConfiguration.init(writeKey: key)
         config.trackApplicationLifecycleEvents = trackLifecycle;

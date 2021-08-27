@@ -8,7 +8,7 @@ import Capacitor
 @objc(CapacitorSegmentPlugin)
 public class CapacitorSegmentPlugin: CAPPlugin {
     private var initialized = false
-    private let implementation = CapacitorSegment()
+    private let implementation = Segment()
 
     @objc func initialize(_ call: CAPPluginCall) {
         if (initialized == true) {

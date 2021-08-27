@@ -17,7 +17,7 @@ import com.segment.analytics.Traits;
 @CapacitorPlugin(name = "CapacitorSegment")
 public class CapacitorSegmentPlugin extends Plugin {
     private boolean initialized = false;
-    private CapacitorSegment implementation = new CapacitorSegment();
+    private Segment implementation = new Segment();
 
     @PluginMethod
     public void initialize(PluginCall call) {
