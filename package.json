@@ -1,5 +1,5 @@
 {
-  "name": "capacitor-segment",
+  "name": "@joinflux/capacitor-segment",
   "version": "0.0.1",
   "description": "A Capacitor plugin for Segment analytics",
   "main": "dist/plugin.cjs.js",
