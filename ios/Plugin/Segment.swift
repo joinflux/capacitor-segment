@@ -1,32 +1,32 @@
 import Foundation
-import Analytics
+import Segment
 
 @objc public class Segment: NSObject {
     @objc public func initialize(key: String, trackLifecycle: Bool) {
-        let config: SEGAnalyticsConfiguration = SEGAnalyticsConfiguration.init(writeKey: key)
+        let config = AnalyticsConfiguration.init(writeKey: key)
         config.trackApplicationLifecycleEvents = trackLifecycle;
         
-        SEGAnalytics.setup(with: config)
+        Analytics.setup(with: config)
         print("CapacitorSegment: initialized")
     }
     
     @objc public func identify(userId: String, traits: Dictionary<String, Any>) {
-        SEGAnalytics.shared().identify(userId, traits: traits)
+        Analytics.shared().identify(userId, traits: traits)
         return
     }
 
     @objc public func track(eventName: String, properties: Dictionary<String, Any>, options: Dictionary<String, Any>) {
-        SEGAnalytics.shared().track(eventName, properties: properties, options: options)
+        Analytics.shared().track(eventName, properties: properties, options: options)
         return
     }
 
     @objc public func page(pathname: String) {
-        SEGAnalytics.shared().screen(pathname)
+        Analytics.shared().screen(pathname)
         return
     }
     
     @objc func reset() {
-        SEGAnalytics.shared().reset()
+        Analytics.shared().reset()
         return
     }
 }
