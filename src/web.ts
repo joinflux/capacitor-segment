@@ -23,16 +23,13 @@ implements CapacitorSegmentPlugin {
   async identify(options: IdentifyOptions): Promise<void> {
     if (!window.analytics) return Promise.reject('Segment is not initialized')
     if (!options.userId) return Promise.reject("User ID is required for 'identify' but not supplied")
-    window.analytics.identify(options)
+    window.analytics.identify(options.userId, options.traits, options.options)
   }
 
   async track(options: TrackOptions): Promise<void> {
     if (!window.analytics) return Promise.reject('Segment is not initialized')
     if (!options.eventName) return Promise.reject('Event name is not supplied')
-    window.analytics.track({ 
-      event: options.eventName, 
-      properties: options.properties,
-    })
+    window.analytics.track(options.eventName, options.properties)
   }
 
   async page (options: PageOptions): Promise<void> {
@@ -67,5 +64,4 @@ implements CapacitorSegmentPlugin {
       }
     });
   }
-
 }
