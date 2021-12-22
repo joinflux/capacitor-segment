@@ -4,8 +4,19 @@ A Capacitor plugin for Segment analytics
 
 ## Install
 
-```bash
+```sh
 npm install capacitor-segment
+
+# yarn 
+yarn add capacitor-segment
+
+# pnpm 
+pnpm add capacitor-segment
+```
+
+and 
+
+```sh
 npx cap sync
 ```
 
@@ -95,3 +106,6 @@ reset() => any
 --------------------
 
 </docgen-api>
+
+## License
+MIT License
