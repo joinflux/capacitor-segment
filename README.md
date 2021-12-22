@@ -1,5 +1,5 @@
 
-<img width="348" alt="Frame 1 (1)" src="https://user-images.githubusercontent.com/12596485/147050756-e69b1c19-7adb-4b12-a029-65f7faae3dcb.png">
+<img width="348" alt="capacitor-segment logo" src="https://user-images.githubusercontent.com/12596485/147050756-e69b1c19-7adb-4b12-a029-65f7faae3dcb.png">
 
 # capacitor-segment
 
