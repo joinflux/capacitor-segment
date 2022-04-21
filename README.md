@@ -1,11 +1,25 @@
+
+<img width="348" alt="capacitor-segment logo" src="https://user-images.githubusercontent.com/12596485/147050756-e69b1c19-7adb-4b12-a029-65f7faae3dcb.png">
+
 # capacitor-segment
 
 A Capacitor plugin for Segment analytics
 
 ## Install
 
-```bash
-npm install capacitor-segment
+```sh
+npm install @joinflux/capacitor-segment
+
+# yarn 
+yarn add @joinflux/capacitor-segment
+
+# pnpm 
+pnpm add @joinflux/capacitor-segment
+```
+
+and 
+
+```sh
 npx cap sync
 ```
 
@@ -95,3 +109,6 @@ reset() => any
 --------------------
 
 </docgen-api>
+
+## License
+MIT License
