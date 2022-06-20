@@ -33,17 +33,12 @@ public class CapacitorSegmentPlugin extends Plugin {
         }
 
         Context context = this.getContext();
-        this.getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                Builder builder = new Analytics.Builder(context, key);
-                if (trackLifecycle) {
-                    builder.trackApplicationLifecycleEvents();
-                }
-                initialized = true;
-                implementation.analytics = builder.build();
-            }
-        });
+        Builder builder = new Analytics.Builder(context, key);
+        if (trackLifecycle) {
+            builder.trackApplicationLifecycleEvents();
+        }
+        initialized = true;
+        implementation.analytics = builder.build();
         call.resolve();
     }
 
