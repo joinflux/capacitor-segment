@@ -26,7 +26,6 @@ public class CapacitorSegmentPlugin extends Plugin {
             return;
         }
         String key = call.getString("key");
-        Boolean trackLifecycle = call.getBoolean("trackLifecycle", false);
         if (key == null) {
             call.reject("Write key is required to initialize plugin");
             return;
@@ -34,8 +33,14 @@ public class CapacitorSegmentPlugin extends Plugin {
 
         Context context = this.getContext();
         Builder builder = new Analytics.Builder(context, key);
+        Boolean trackLifecycle = call.getBoolean("trackLifecycle", false);
         if (trackLifecycle) {
             builder.trackApplicationLifecycleEvents();
+        }
+
+        Boolean recordScreenViews = call.getBoolean("recordScreenViews", false);
+        if (recordScreenViews) {
+            builder.recordScreenViews();
         }
         initialized = true;
         implementation.analytics = builder.build();
