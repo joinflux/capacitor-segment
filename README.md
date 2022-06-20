@@ -44,9 +44,9 @@ npx cap sync
 initialize(options: InitializeOptions) => any
 ```
 
-| Param         | Type                          |
-| ------------- | ----------------------------- |
-| **`options`** | <code>{ key: string; }</code> |
+| Param         | Type                                                                                 |
+| ------------- | ------------------------------------------------------------------------------------ |
+| **`options`** | <code>{ key: string; trackLifecycle?: boolean; recordScreenViews?: boolean; }</code> |
 
 **Returns:** <code>any</code>
 

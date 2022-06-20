@@ -9,6 +9,7 @@ export interface CapacitorSegmentPlugin {
 export type InitializeOptions = {
   key: string;
   trackLifecycle?: boolean;
+  recordScreenViews?: boolean;
 };
 
 export type Identity = { userId: string };
