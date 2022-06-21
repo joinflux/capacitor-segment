@@ -35,7 +35,7 @@ public class CapacitorSegmentPlugin extends Plugin {
         Builder builder = new Analytics.Builder(context, key);
         Boolean trackLifecycle = call.getBoolean("trackLifecycle", false);
         if (trackLifecycle) {
-            builder.trackApplicationLifecycleEvents();
+            builder.trackApplicationLifecycleEvents().experimentalUseNewLifecycleMethods(false);
         }
 
         Boolean recordScreenViews = call.getBoolean("recordScreenViews", false);
