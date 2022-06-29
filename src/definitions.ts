@@ -10,6 +10,7 @@ export type InitializeOptions = {
   key: string;
   trackLifecycle?: boolean;
   recordScreenViews?: boolean;
+  proxyHost?: string;
 };
 
 export type Identity = { userId: string };
