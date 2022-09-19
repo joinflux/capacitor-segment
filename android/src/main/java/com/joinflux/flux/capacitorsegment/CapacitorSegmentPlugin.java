@@ -26,24 +26,24 @@ public class CapacitorSegmentPlugin extends Plugin {
             return;
         }
         String key = call.getString("key");
-        Boolean trackLifecycle = call.getBoolean("trackLifecycle", false);
         if (key == null) {
             call.reject("Write key is required to initialize plugin");
             return;
         }
 
         Context context = this.getContext();
-        this.getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                Builder builder = new Analytics.Builder(context, key);
-                if (trackLifecycle) {
-                    builder.trackApplicationLifecycleEvents();
-                }
-                initialized = true;
-                implementation.analytics = builder.build();
-            }
-        });
+        Builder builder = new Analytics.Builder(context, key);
+        Boolean trackLifecycle = call.getBoolean("trackLifecycle", false);
+        if (trackLifecycle) {
+            builder.trackApplicationLifecycleEvents().experimentalUseNewLifecycleMethods(false);
+        }
+
+        Boolean recordScreenViews = call.getBoolean("recordScreenViews", false);
+        if (recordScreenViews) {
+            builder.recordScreenViews();
+        }
+        initialized = true;
+        implementation.analytics = builder.build();
         call.resolve();
     }
 
