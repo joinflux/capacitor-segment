@@ -9,15 +9,20 @@ npm install capacitor-segment
 npx cap sync
 ```
 
+### Capacitor 3 vs Capacitor 4
+
+- Version 0.1.3 will target the latest Capacitor version
+- Version 1.0.0 will target Capacitor 4
+
 ## API
 
 <docgen-index>
 
-* [`initialize(...)`](#initialize)
-* [`identify(...)`](#identify)
-* [`track(...)`](#track)
-* [`page(...)`](#page)
-* [`reset()`](#reset)
+- [`initialize(...)`](#initialize)
+- [`identify(...)`](#identify)
+- [`track(...)`](#track)
+- [`page(...)`](#page)
+- [`reset()`](#reset)
 
 </docgen-index>
 
@@ -36,8 +41,7 @@ initialize(options: InitializeOptions) => any
 
 **Returns:** <code>any</code>
 
---------------------
-
+---
 
 ### identify(...)
 
@@ -51,8 +55,7 @@ identify(options: IdentifyOptions) => any
 
 **Returns:** <code>any</code>
 
---------------------
-
+---
 
 ### track(...)
 
@@ -66,8 +69,7 @@ track(options: TrackOptions) => any
 
 **Returns:** <code>any</code>
 
---------------------
-
+---
 
 ### page(...)
 
@@ -81,8 +83,7 @@ page(options: PageOptions) => any
 
 **Returns:** <code>any</code>
 
---------------------
-
+---
 
 ### reset()
 
@@ -92,6 +93,6 @@ reset() => any
 
 **Returns:** <code>any</code>
 
---------------------
+---
 
 </docgen-api>
