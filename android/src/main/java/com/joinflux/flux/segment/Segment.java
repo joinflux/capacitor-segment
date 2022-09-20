@@ -1,27 +1,25 @@
-package com.joinflux.flux.capacitorsegment;
+package com.joinflux.flux.segment;
 
+import android.content.Context;
+import android.util.Log;
 import com.getcapacitor.JSObject;
 import com.getcapacitor.NativePlugin;
 import com.getcapacitor.Plugin;
 import com.getcapacitor.PluginCall;
 import com.getcapacitor.PluginMethod;
-
-import android.content.Context;
-import android.util.Log;
 import com.segment.analytics.Analytics;
 import com.segment.analytics.Analytics.Builder;
 import com.segment.analytics.Options;
 import com.segment.analytics.Properties;
 import com.segment.analytics.Traits;
-
-import org.json.JSONException;
-
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import org.json.JSONException;
 
 public class Segment {
-    private static final String PLUGIN_TAG = "CapacitorSegment";
+
+    private static final String PLUGIN_TAG = "Segment";
     public Analytics analytics;
 
     public void identify(String userId, JSObject traits) {
@@ -29,11 +27,7 @@ public class Segment {
     }
 
     public void track(String eventName, JSObject properties, JSObject options) {
-        this.analytics.track(
-                eventName,
-                makePropertiesFromMap(makeMapFromJSON(properties)),
-                makeOptionsFromJSON(options)
-        );
+        this.analytics.track(eventName, makePropertiesFromMap(makeMapFromJSON(properties)), makeOptionsFromJSON(options));
     }
 
     public void page(String pathname) {
