@@ -14,10 +14,10 @@ import com.segment.analytics.Properties;
 import com.segment.analytics.Traits;
 
 @CapacitorPlugin(name = "Segment")
-public class CapacitorSegmentPlugin extends Plugin {
+public class SegmentPlugin extends Plugin {
 
     private boolean initialized = false;
-    private com.joinflux.flux.capacitorsegment.Segment implementation = new com.joinflux.flux.capacitorsegment.Segment();
+    private Segment implementation = new Segment();
 
     @PluginMethod
     public void initialize(PluginCall call) {
