@@ -1,4 +1,4 @@
-export interface CapacitorSegmentPlugin {
+export interface SegmentPlugin {
   initialize(options: InitializeOptions): Promise<void>;
   identify(options: IdentifyOptions): Promise<void>;
   track(options: TrackOptions): Promise<void>;

@@ -1,21 +1,21 @@
-package com.joinflux.flux.capacitorsegment;
+package com.joinflux.flux.segment;
 
+import android.content.Context;
+import android.util.Log;
 import com.getcapacitor.JSObject;
 import com.getcapacitor.Plugin;
 import com.getcapacitor.PluginCall;
 import com.getcapacitor.PluginMethod;
 import com.getcapacitor.annotation.CapacitorPlugin;
-
-import android.content.Context;
-import android.util.Log;
 import com.segment.analytics.Analytics;
 import com.segment.analytics.Analytics.Builder;
 import com.segment.analytics.Options;
 import com.segment.analytics.Properties;
 import com.segment.analytics.Traits;
 
-@CapacitorPlugin(name = "CapacitorSegment")
-public class CapacitorSegmentPlugin extends Plugin {
+@CapacitorPlugin(name = "Segment")
+public class SegmentPlugin extends Plugin {
+
     private boolean initialized = false;
     private Segment implementation = new Segment();
 
