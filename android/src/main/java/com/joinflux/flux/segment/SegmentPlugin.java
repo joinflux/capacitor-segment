@@ -32,18 +32,24 @@ public class SegmentPlugin extends Plugin {
         }
 
         Context context = this.getContext();
-        Builder builder = new Analytics.Builder(context, key);
-        Boolean trackLifecycle = call.getBoolean("trackLifecycle", false);
-        if (trackLifecycle) {
-            builder.trackApplicationLifecycleEvents().experimentalUseNewLifecycleMethods(false);
+        Analytics analytics = AnalyticsSingleton.get();
+        if (analytics == null) {
+            Builder builder = new Analytics.Builder(context, key);
+            Boolean trackLifecycle = call.getBoolean("trackLifecycle", false);
+            if (trackLifecycle) {
+                builder.trackApplicationLifecycleEvents().experimentalUseNewLifecycleMethods(false);
+            }
+
+            Boolean recordScreenViews = call.getBoolean("recordScreenViews", false);
+            if (recordScreenViews) {
+                builder.recordScreenViews();
+            }
+            analytics = builder.build();
+            AnalyticsSingleton.set(analytics);
         }
 
-        Boolean recordScreenViews = call.getBoolean("recordScreenViews", false);
-        if (recordScreenViews) {
-            builder.recordScreenViews();
-        }
         initialized = true;
-        implementation.analytics = builder.build();
+        implementation.analytics = analytics;
         call.resolve();
     }
 
