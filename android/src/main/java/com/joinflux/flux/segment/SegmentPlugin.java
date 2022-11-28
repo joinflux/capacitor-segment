@@ -22,10 +22,12 @@ public class SegmentPlugin extends Plugin {
     @PluginMethod
     public void initialize(PluginCall call) {
         synchronized(implementation) {
+            // No-op
             if (initialized == true) {
-                call.reject("Segment is already initialized");
+                call.resolve();
                 return;
             }
+
             String key = call.getString("key");
             if (key == null) {
                 call.reject("Write key is required to initialize plugin");
