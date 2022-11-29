@@ -16,35 +16,39 @@ import com.segment.analytics.Traits;
 @CapacitorPlugin(name = "Segment")
 public class SegmentPlugin extends Plugin {
 
-    private boolean initialized = false;
-    private Segment implementation = new Segment();
+    private static boolean initialized = false;
+    private static Segment implementation = new Segment();
 
     @PluginMethod
     public void initialize(PluginCall call) {
-        if (initialized == true) {
-            call.reject("Segment is already initialized");
-            return;
-        }
-        String key = call.getString("key");
-        if (key == null) {
-            call.reject("Write key is required to initialize plugin");
-            return;
-        }
+        synchronized(implementation) {
+            // No-op
+            if (initialized == true) {
+                call.resolve();
+                return;
+            }
 
-        Context context = this.getContext();
-        Builder builder = new Analytics.Builder(context, key);
-        Boolean trackLifecycle = call.getBoolean("trackLifecycle", false);
-        if (trackLifecycle) {
-            builder.trackApplicationLifecycleEvents().experimentalUseNewLifecycleMethods(false);
-        }
+            String key = call.getString("key");
+            if (key == null) {
+                call.reject("Write key is required to initialize plugin");
+                return;
+            }
 
-        Boolean recordScreenViews = call.getBoolean("recordScreenViews", false);
-        if (recordScreenViews) {
-            builder.recordScreenViews();
+            Context context = this.getContext();
+            Builder builder = new Analytics.Builder(context, key);
+            Boolean trackLifecycle = call.getBoolean("trackLifecycle", false);
+            if (trackLifecycle) {
+                builder.trackApplicationLifecycleEvents().experimentalUseNewLifecycleMethods(false);
+            }
+
+            Boolean recordScreenViews = call.getBoolean("recordScreenViews", false);
+            if (recordScreenViews) {
+                builder.recordScreenViews();
+            }
+            initialized = true;
+            implementation.analytics = builder.build();
+            call.resolve();
         }
-        initialized = true;
-        implementation.analytics = builder.build();
-        call.resolve();
     }
 
     @PluginMethod
