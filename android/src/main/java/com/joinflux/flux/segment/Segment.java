@@ -1,21 +1,18 @@
 package com.joinflux.flux.segment;
 
-import android.content.Context;
 import android.util.Log;
+
 import com.getcapacitor.JSObject;
-import com.getcapacitor.NativePlugin;
-import com.getcapacitor.Plugin;
-import com.getcapacitor.PluginCall;
-import com.getcapacitor.PluginMethod;
 import com.segment.analytics.Analytics;
-import com.segment.analytics.Analytics.Builder;
 import com.segment.analytics.Options;
 import com.segment.analytics.Properties;
 import com.segment.analytics.Traits;
+
+import org.json.JSONException;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import org.json.JSONException;
 
 public class Segment {
 
@@ -40,7 +37,7 @@ public class Segment {
 
     private Map<String, Object> makeMapFromJSON(JSObject obj) {
         Iterator<String> keys = obj.keys();
-        Map<String, Object> map = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<>();
         while (keys.hasNext()) {
             String key = keys.next();
             try {
@@ -71,7 +68,7 @@ public class Segment {
         while (keys.hasNext()) {
             String key = keys.next();
             try {
-                boolean enabled = obj.getBool(key);
+                boolean enabled = Boolean.TRUE.equals(obj.getBoolean(key, false));
                 options.setIntegration(key, enabled);
             } catch (Exception e) {
                 Log.d(PLUGIN_TAG, "could not get boolean for key " + key);
