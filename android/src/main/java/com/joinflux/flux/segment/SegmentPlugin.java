@@ -1,7 +1,7 @@
 package com.joinflux.flux.segment;
 
 import android.content.Context;
-import android.util.Log;
+
 import com.getcapacitor.JSObject;
 import com.getcapacitor.Plugin;
 import com.getcapacitor.PluginCall;
@@ -9,21 +9,18 @@ import com.getcapacitor.PluginMethod;
 import com.getcapacitor.annotation.CapacitorPlugin;
 import com.segment.analytics.Analytics;
 import com.segment.analytics.Analytics.Builder;
-import com.segment.analytics.Options;
-import com.segment.analytics.Properties;
-import com.segment.analytics.Traits;
 
 @CapacitorPlugin(name = "Segment")
 public class SegmentPlugin extends Plugin {
 
     private static boolean initialized = false;
-    private static Segment implementation = new Segment();
+    private static final Segment implementation = new Segment();
 
     @PluginMethod
     public void initialize(PluginCall call) {
         synchronized(implementation) {
             // No-op
-            if (initialized == true) {
+            if (initialized) {
                 call.resolve();
                 return;
             }
@@ -36,12 +33,12 @@ public class SegmentPlugin extends Plugin {
 
             Context context = this.getContext();
             Builder builder = new Analytics.Builder(context, key);
-            Boolean trackLifecycle = call.getBoolean("trackLifecycle", false);
+            boolean trackLifecycle = Boolean.TRUE.equals(call.getBoolean("trackLifecycle", false));
             if (trackLifecycle) {
                 builder.trackApplicationLifecycleEvents().experimentalUseNewLifecycleMethods(false);
             }
 
-            Boolean recordScreenViews = call.getBoolean("recordScreenViews", false);
+            boolean recordScreenViews = Boolean.TRUE.equals(call.getBoolean("recordScreenViews", false));
             if (recordScreenViews) {
                 builder.recordScreenViews();
             }
@@ -62,7 +59,7 @@ public class SegmentPlugin extends Plugin {
             call.reject("User ID is required for 'identify' but not supplied");
             return;
         }
-        JSObject traits = call.getObject("traits");
+        JSObject traits = call.getObject("traits", new JSObject());
 
         implementation.identify(userId, traits);
         call.resolve();
@@ -79,8 +76,8 @@ public class SegmentPlugin extends Plugin {
             call.reject("Event name is not supplied");
             return;
         }
-        JSObject properties = call.getObject("properties");
-        JSObject options = call.getObject("options");
+        JSObject properties = call.getObject("properties", new JSObject());
+        JSObject options = call.getObject("options", new JSObject());
 
         implementation.track(eventName, properties, options);
         call.resolve();
