@@ -32,7 +32,26 @@ public class SegmentPlugin extends Plugin {
             }
 
             Context context = this.getContext();
-            Builder builder = new Analytics.Builder(context, key);
+
+            Builder builder;
+            String proxyHost = call.getString("proxyHost");
+
+            if (proxyHost == null) {
+                builder = new Analytics.Builder(context, key);
+            } else {
+                builder =
+                    new Analytics.Builder(context, key)
+                        .connectionFactory(
+                            new ConnectionFactory() {
+                                @Override
+                                protected HttpURLConnection openConnection(String url) throws IOException {
+                                    String path = Uri.parse(url).getPath();
+                                    return super.openConnection(proxyHost + path);
+                                }
+                            }
+                        );
+            }
+
             boolean trackLifecycle = Boolean.TRUE.equals(call.getBoolean("trackLifecycle", false));
             if (trackLifecycle) {
                 builder.trackApplicationLifecycleEvents().experimentalUseNewLifecycleMethods(false);
