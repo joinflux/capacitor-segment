@@ -32,7 +32,7 @@ public class Segment {
                 pathname,
                 makePropertiesFromMap(makeMapFromJSON(properties))
         );
-    }}
+    }
 
     public void reset() {
         this.analytics.reset();
