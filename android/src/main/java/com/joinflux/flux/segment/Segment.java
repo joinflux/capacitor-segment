@@ -27,9 +27,12 @@ public class Segment {
         this.analytics.track(eventName, makePropertiesFromMap(makeMapFromJSON(properties)), makeOptionsFromJSON(options));
     }
 
-    public void page(String pathname) {
-        this.analytics.screen(pathname);
-    }
+    public void page(String pathname, JSObject properties) {
+        this.analytics.screen(
+                pathname,
+                makePropertiesFromMap(makeMapFromJSON(properties))
+        );
+    }}
 
     public void reset() {
         this.analytics.reset();
