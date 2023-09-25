@@ -12,7 +12,7 @@ public class CapacitorSegmentPlugin: CAPPlugin {
 
     @objc func initialize(_ call: CAPPluginCall) {
         if (initialized == true) {
-            call.reject("Segment is already initialized")
+            call.resolve()
             return
         }
         guard let key = call.getString("key") else {
