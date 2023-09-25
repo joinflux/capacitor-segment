@@ -1,13 +1,10 @@
 import { registerPlugin } from '@capacitor/core';
 
-import type { CapacitorSegmentPlugin } from './definitions';
+import type { SegmentPlugin } from './definitions';
 
-const CapacitorSegment = registerPlugin<CapacitorSegmentPlugin>(
-  'CapacitorSegment',
-  {
-    web: () => import('./web').then(m => new m.CapacitorSegmentWeb()),
-  },
-);
+const Segment = registerPlugin<SegmentPlugin>('Segment', {
+  web: () => import('./web').then(m => new m.SegmentWeb()),
+});
 
 export * from './definitions';
-export { CapacitorSegment };
+export { Segment };

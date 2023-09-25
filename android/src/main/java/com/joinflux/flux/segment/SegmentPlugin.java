@@ -1,50 +1,51 @@
-package com.joinflux.flux.capacitorsegment;
+package com.joinflux.flux.segment;
+
+import android.content.Context;
 
 import com.getcapacitor.JSObject;
 import com.getcapacitor.Plugin;
 import com.getcapacitor.PluginCall;
 import com.getcapacitor.PluginMethod;
 import com.getcapacitor.annotation.CapacitorPlugin;
-
-import android.content.Context;
-import android.util.Log;
 import com.segment.analytics.Analytics;
 import com.segment.analytics.Analytics.Builder;
-import com.segment.analytics.Options;
-import com.segment.analytics.Properties;
-import com.segment.analytics.Traits;
 
-@CapacitorPlugin(name = "CapacitorSegment")
-public class CapacitorSegmentPlugin extends Plugin {
-    private boolean initialized = false;
-    private Segment implementation = new Segment();
+@CapacitorPlugin(name = "Segment")
+public class SegmentPlugin extends Plugin {
+
+    private static boolean initialized = false;
+    private static final Segment implementation = new Segment();
 
     @PluginMethod
     public void initialize(PluginCall call) {
-        if (initialized == true) {
-            call.reject("Segment is already initialized");
-            return;
-        }
-        String key = call.getString("key");
-        Boolean trackLifecycle = call.getBoolean("trackLifecycle", false);
-        if (key == null) {
-            call.reject("Write key is required to initialize plugin");
-            return;
-        }
-
-        Context context = this.getContext();
-        this.getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                Builder builder = new Analytics.Builder(context, key);
-                if (trackLifecycle) {
-                    builder.trackApplicationLifecycleEvents();
-                }
-                initialized = true;
-                implementation.analytics = builder.build();
+        synchronized(implementation) {
+            // No-op
+            if (initialized) {
+                call.resolve();
+                return;
             }
-        });
-        call.resolve();
+
+            String key = call.getString("key");
+            if (key == null) {
+                call.reject("Write key is required to initialize plugin");
+                return;
+            }
+
+            Context context = this.getContext();
+            Builder builder = new Analytics.Builder(context, key);
+            boolean trackLifecycle = Boolean.TRUE.equals(call.getBoolean("trackLifecycle", false));
+            if (trackLifecycle) {
+                builder.trackApplicationLifecycleEvents().experimentalUseNewLifecycleMethods(false);
+            }
+
+            boolean recordScreenViews = Boolean.TRUE.equals(call.getBoolean("recordScreenViews", false));
+            if (recordScreenViews) {
+                builder.recordScreenViews();
+            }
+            initialized = true;
+            implementation.analytics = builder.build();
+            call.resolve();
+        }
     }
 
     @PluginMethod
@@ -58,7 +59,7 @@ public class CapacitorSegmentPlugin extends Plugin {
             call.reject("User ID is required for 'identify' but not supplied");
             return;
         }
-        JSObject traits = call.getObject("traits");
+        JSObject traits = call.getObject("traits", new JSObject());
 
         implementation.identify(userId, traits);
         call.resolve();
@@ -75,8 +76,8 @@ public class CapacitorSegmentPlugin extends Plugin {
             call.reject("Event name is not supplied");
             return;
         }
-        JSObject properties = call.getObject("properties");
-        JSObject options = call.getObject("options");
+        JSObject properties = call.getObject("properties", new JSObject());
+        JSObject options = call.getObject("options", new JSObject());
 
         implementation.track(eventName, properties, options);
         call.resolve();

@@ -1,23 +1,43 @@
+<img width="348" alt="capacitor-segment logo" src="https://user-images.githubusercontent.com/12596485/147050756-e69b1c19-7adb-4b12-a029-65f7faae3dcb.png">
+
 # capacitor-segment
 
 A Capacitor plugin for Segment analytics
 
 ## Install
 
-```bash
-npm install capacitor-segment
+```sh
+npm install @joinflux/capacitor-segment
+
+# yarn
+yarn add @joinflux/capacitor-segment
+
+# pnpm
+pnpm add @joinflux/capacitor-segment
+```
+
+and
+
+```sh
 npx cap sync
 ```
+
+### Versioning
+
+- Version 0.1.3 will target the latest Capacitor version
+  - Capacitor 3 is recommended for this version
+- Version 1.x.x will target Capacitor 4
+- Version 2.x.x will target Capacitor 5
 
 ## API
 
 <docgen-index>
 
-* [`initialize(...)`](#initialize)
-* [`identify(...)`](#identify)
-* [`track(...)`](#track)
-* [`page(...)`](#page)
-* [`reset()`](#reset)
+- [`initialize(...)`](#initialize)
+- [`identify(...)`](#identify)
+- [`track(...)`](#track)
+- [`page(...)`](#page)
+- [`reset()`](#reset)
 
 </docgen-index>
 
@@ -30,14 +50,13 @@ npx cap sync
 initialize(options: InitializeOptions) => any
 ```
 
-| Param         | Type                          |
-| ------------- | ----------------------------- |
-| **`options`** | <code>{ key: string; }</code> |
+| Param         | Type                                                                                 |
+| ------------- | ------------------------------------------------------------------------------------ |
+| **`options`** | <code>{ key: string; trackLifecycle?: boolean; recordScreenViews?: boolean; }</code> |
 
 **Returns:** <code>any</code>
 
---------------------
-
+---
 
 ### identify(...)
 
@@ -51,8 +70,7 @@ identify(options: IdentifyOptions) => any
 
 **Returns:** <code>any</code>
 
---------------------
-
+---
 
 ### track(...)
 
@@ -66,8 +84,7 @@ track(options: TrackOptions) => any
 
 **Returns:** <code>any</code>
 
---------------------
-
+---
 
 ### page(...)
 
@@ -81,8 +98,7 @@ page(options: PageOptions) => any
 
 **Returns:** <code>any</code>
 
---------------------
-
+---
 
 ### reset()
 
@@ -92,6 +108,10 @@ reset() => any
 
 **Returns:** <code>any</code>
 
---------------------
+---
 
 </docgen-api>
+
+## License
+
+MIT License

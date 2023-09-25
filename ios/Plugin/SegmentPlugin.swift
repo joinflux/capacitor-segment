@@ -5,8 +5,8 @@ import Capacitor
  * Please read the Capacitor iOS Plugin Development Guide
  * here: https://capacitorjs.com/docs/plugins/ios
  */
-@objc(CapacitorSegmentPlugin)
-public class CapacitorSegmentPlugin: CAPPlugin {
+@objc(SegmentPlugin)
+public class SegmentPlugin: CAPPlugin {
     private var initialized = false
     private let implementation = Segment()
 

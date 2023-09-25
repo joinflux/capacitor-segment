@@ -1,15 +1,9 @@
-package com.joinflux.flux.capacitorsegment;
+package com.joinflux.flux.segment;
+
+import android.util.Log;
 
 import com.getcapacitor.JSObject;
-import com.getcapacitor.NativePlugin;
-import com.getcapacitor.Plugin;
-import com.getcapacitor.PluginCall;
-import com.getcapacitor.PluginMethod;
-
-import android.content.Context;
-import android.util.Log;
 import com.segment.analytics.Analytics;
-import com.segment.analytics.Analytics.Builder;
 import com.segment.analytics.Options;
 import com.segment.analytics.Properties;
 import com.segment.analytics.Traits;
@@ -21,7 +15,8 @@ import java.util.Iterator;
 import java.util.Map;
 
 public class Segment {
-    private static final String PLUGIN_TAG = "CapacitorSegment";
+
+    private static final String PLUGIN_TAG = "Segment";
     public Analytics analytics;
 
     public void identify(String userId, JSObject traits) {
@@ -29,11 +24,7 @@ public class Segment {
     }
 
     public void track(String eventName, JSObject properties, JSObject options) {
-        this.analytics.track(
-                eventName,
-                makePropertiesFromMap(makeMapFromJSON(properties)),
-                makeOptionsFromJSON(options)
-        );
+        this.analytics.track(eventName, makePropertiesFromMap(makeMapFromJSON(properties)), makeOptionsFromJSON(options));
     }
 
     public void page(String pathname) {
@@ -46,7 +37,7 @@ public class Segment {
 
     private Map<String, Object> makeMapFromJSON(JSObject obj) {
         Iterator<String> keys = obj.keys();
-        Map<String, Object> map = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<>();
         while (keys.hasNext()) {
             String key = keys.next();
             try {
@@ -77,7 +68,7 @@ public class Segment {
         while (keys.hasNext()) {
             String key = keys.next();
             try {
-                boolean enabled = obj.getBool(key);
+                boolean enabled = Boolean.TRUE.equals(obj.getBoolean(key, false));
                 options.setIntegration(key, enabled);
             } catch (Exception e) {
                 Log.d(PLUGIN_TAG, "could not get boolean for key " + key);
