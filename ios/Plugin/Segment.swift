@@ -5,6 +5,19 @@ import Segment
     @objc public func initialize(key: String, trackLifecycle: Bool) {
         let config = AnalyticsConfiguration.init(writeKey: key)
         config.trackApplicationLifecycleEvents = trackLifecycle;
+
+        if(!proxyHost.isEmpty) {
+            config.requestFactory = { (url: URL) -> NSMutableURLRequest in
+                var result = NSMutableURLRequest(url: url)
+                if var components = URLComponents(url: url, resolvingAgainstBaseURL: false) {
+                    components.host = proxyHost
+                    if let transformedURL = components.url {
+                        result = NSMutableURLRequest(url: transformedURL)
+                    }
+                }
+                return result
+            }
+        }
         
         Analytics.setup(with: config)
         print("CapacitorSegment: initialized")

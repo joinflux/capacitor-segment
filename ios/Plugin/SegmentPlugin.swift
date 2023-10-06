@@ -20,7 +20,8 @@ public class SegmentPlugin: CAPPlugin {
             return
         }
         let trackLifecycle = call.getBool("trackLifecycle", false)
-        implementation.initialize(key: key, trackLifecycle: trackLifecycle)
+        let proxyHost = call.getString("proxyHost", "")
+        implementation.initialize(key: key, trackLifecycle: trackLifecycle, proxyHost: proxyHost)
         initialized = true
         call.resolve()
     }
