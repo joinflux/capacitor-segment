@@ -29,6 +29,29 @@ npx cap sync
 - Version 1.x.x will target Capacitor 4
 - Version 2.x.x will target Capacitor 5
 
+## Usage
+
+First need initialize plugin with you [writeKey](https://segment.com/docs/connections/find-writekey/), and then use track methods:
+
+```ts 
+import { Segment } from '@joinflux/capacitor-segment'
+
+Segment.initialize({
+  key: 'you write key',
+})
+
+// see API section with other methods 
+Segment.track({ eventName: 'Hello World'})
+```
+
+For prevent crashing app in HMR on init hook, recommended handling exception: 
+
+```ts
+await Segment.initialize({
+  // ...
+}).catch((e) => console.error(e))
+```
+
 ## API
 
 <docgen-index>
