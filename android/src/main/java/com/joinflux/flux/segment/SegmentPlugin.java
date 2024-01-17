@@ -94,8 +94,9 @@ public class SegmentPlugin extends Plugin {
             call.reject("Pathname was not supplied");
             return;
         }
+        JSObject properties = call.getObject("properties");
 
-        implementation.page(pathname);
+        implementation.page(pathname, properties);
         call.resolve();
     }
 

@@ -92,9 +92,9 @@ track(options: TrackOptions) => any
 page(options: PageOptions) => any
 ```
 
-| Param         | Type                               |
-| ------------- | ---------------------------------- |
-| **`options`** | <code>{ pathname: string; }</code> |
+| Param         | Type                                                |
+| ------------- |-----------------------------------------------------|
+| **`options`** | <code>{ pathname: string; properties: any; }</code> |
 
 **Returns:** <code>any</code>
 
