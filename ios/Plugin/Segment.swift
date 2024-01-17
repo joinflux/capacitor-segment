@@ -5,7 +5,7 @@ import Segment
     @objc public func initialize(key: String, trackLifecycle: Bool) {
         let config = AnalyticsConfiguration.init(writeKey: key)
         config.trackApplicationLifecycleEvents = trackLifecycle;
-        
+        Analytics.debug(true)
         Analytics.setup(with: config)
         print("CapacitorSegment: initialized")
     }
