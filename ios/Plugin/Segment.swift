@@ -5,7 +5,6 @@ import Segment
     @objc public func initialize(key: String, trackLifecycle: Bool) {
         let config = AnalyticsConfiguration.init(writeKey: key)
         config.trackApplicationLifecycleEvents = trackLifecycle;
-        
         Analytics.setup(with: config)
         print("CapacitorSegment: initialized")
     }
@@ -20,11 +19,12 @@ import Segment
         return
     }
 
-    @objc public func page(pathname: String) {
-        Analytics.shared().screen(pathname)
+
+    @objc public func page(pathname: String, properties: Dictionary<String, Any>) {
+        Analytics.shared().screen(pathname, properties: properties)
         return
     }
-    
+
     @objc func reset() {
         Analytics.shared().reset()
         return

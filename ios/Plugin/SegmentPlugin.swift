@@ -65,8 +65,10 @@ public class SegmentPlugin: CAPPlugin {
             call.reject("Pathname was not supplied")
             return
         }
-        
-        implementation.page(pathname: pathname)
+        let properties: Dictionary = call.getObject("properties") ?? [:]
+
+
+        implementation.page(pathname: pathname, properties: properties)
         call.resolve()
     }
     
