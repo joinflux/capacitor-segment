@@ -28,6 +28,7 @@ npx cap sync
   - Capacitor 3 is recommended for this version
 - Version 1.x.x will target Capacitor 4
 - Version 2.x.x will target Capacitor 5
+- Version 6.x.x will target Capacitor 6
 
 ## API
 
