@@ -1,7 +1,6 @@
 package com.joinflux.flux.segment;
 
 import android.content.Context;
-
 import com.getcapacitor.JSObject;
 import com.getcapacitor.Plugin;
 import com.getcapacitor.PluginCall;
@@ -18,7 +17,7 @@ public class SegmentPlugin extends Plugin {
 
     @PluginMethod
     public void initialize(PluginCall call) {
-        synchronized(implementation) {
+        synchronized (implementation) {
             // No-op
             if (initialized) {
                 call.resolve();

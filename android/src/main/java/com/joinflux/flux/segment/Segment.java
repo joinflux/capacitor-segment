@@ -1,18 +1,15 @@
 package com.joinflux.flux.segment;
 
 import android.util.Log;
-
 import com.getcapacitor.JSObject;
 import com.segment.analytics.Analytics;
 import com.segment.analytics.Options;
 import com.segment.analytics.Properties;
 import com.segment.analytics.Traits;
-
-import org.json.JSONException;
-
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import org.json.JSONException;
 
 public class Segment {
 

@@ -4,18 +4,18 @@ import Segment
 @objc public class Segment: NSObject {
     @objc public func initialize(key: String, trackLifecycle: Bool) {
         let config = AnalyticsConfiguration.init(writeKey: key)
-        config.trackApplicationLifecycleEvents = trackLifecycle;
-        
+        config.trackApplicationLifecycleEvents = trackLifecycle
+
         Analytics.setup(with: config)
         print("CapacitorSegment: initialized")
     }
-    
-    @objc public func identify(userId: String, traits: Dictionary<String, Any>) {
+
+    @objc public func identify(userId: String, traits: [String: Any]) {
         Analytics.shared().identify(userId, traits: traits)
         return
     }
 
-    @objc public func track(eventName: String, properties: Dictionary<String, Any>, options: Dictionary<String, Any>) {
+    @objc public func track(eventName: String, properties: [String: Any], options: [String: Any]) {
         Analytics.shared().track(eventName, properties: properties, options: options)
         return
     }
@@ -24,7 +24,7 @@ import Segment
         Analytics.shared().screen(pathname)
         return
     }
-    
+
     @objc func reset() {
         Analytics.shared().reset()
         return

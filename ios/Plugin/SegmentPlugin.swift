@@ -11,7 +11,7 @@ public class SegmentPlugin: CAPPlugin {
     private let implementation = Segment()
 
     @objc func initialize(_ call: CAPPluginCall) {
-        if (initialized == true) {
+        if initialized == true {
             call.resolve()
             return
         }
@@ -24,9 +24,9 @@ public class SegmentPlugin: CAPPlugin {
         initialized = true
         call.resolve()
     }
-    
+
     @objc func identify(_ call: CAPPluginCall) {
-        if (initialized != true) {
+        if initialized != true {
             call.reject("Segment is not initialized")
             return
         }
@@ -34,14 +34,14 @@ public class SegmentPlugin: CAPPlugin {
             call.reject("User ID is required for 'identify' but not supplied")
             return
         }
-        
+
         let traits: Dictionary = call.getObject("traits") ?? [:]
         implementation.identify(userId: userId, traits: traits)
         call.resolve()
     }
-    
+
     @objc func track(_ call: CAPPluginCall) {
-        if (initialized != true) {
+        if initialized != true {
             call.reject("Segment is not initialized")
             return
         }
@@ -49,7 +49,7 @@ public class SegmentPlugin: CAPPlugin {
             call.reject("Event name is not supplied")
             return
         }
-        
+
         let properties: Dictionary = call.getObject("properties") ?? [:]
         let options: Dictionary = call.getObject("options") ?? [:]
         implementation.track(eventName: eventName, properties: properties, options: options)
@@ -57,7 +57,7 @@ public class SegmentPlugin: CAPPlugin {
     }
 
     @objc func page(_ call: CAPPluginCall) {
-        if (initialized != true) {
+        if initialized != true {
             call.reject("Segment is not initialized")
             return
         }
@@ -65,17 +65,17 @@ public class SegmentPlugin: CAPPlugin {
             call.reject("Pathname was not supplied")
             return
         }
-        
+
         implementation.page(pathname: pathname)
         call.resolve()
     }
-    
+
     @objc func reset(_ call: CAPPluginCall) {
-        if (initialized != true) {
+        if initialized != true {
             call.reject("Segment is not initialized")
             return
         }
-        
+
         implementation.reset()
         call.resolve()
     }

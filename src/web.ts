@@ -1,12 +1,6 @@
 import { WebPlugin } from '@capacitor/core';
 
-import type {
-  SegmentPlugin,
-  IdentifyOptions,
-  InitializeOptions,
-  PageOptions,
-  TrackOptions,
-} from './definitions';
+import type { SegmentPlugin, IdentifyOptions, InitializeOptions, PageOptions, TrackOptions } from './definitions';
 
 const getSegmentScript = (
   key: string,
@@ -27,10 +21,7 @@ export class SegmentWeb extends WebPlugin implements SegmentPlugin {
 
   async identify(options: IdentifyOptions): Promise<void> {
     if (!window.analytics) return Promise.reject('Segment is not initialized');
-    if (!options.userId)
-      return Promise.reject(
-        "User ID is required for 'identify' but not supplied",
-      );
+    if (!options.userId) return Promise.reject("User ID is required for 'identify' but not supplied");
     window.analytics.identify(options.userId, options.traits, options.options);
   }
 
@@ -57,7 +48,7 @@ export class SegmentWeb extends WebPlugin implements SegmentPlugin {
    * @param src - source of the script
    */
   private loadScript(id: string, script: string): Promise<any> {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       if (document.getElementById(id)) {
         resolve(null);
       } else {
