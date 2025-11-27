@@ -24,11 +24,12 @@ npx cap sync
 
 ### Versioning
 
+- Version 7.x.x will target Capacitor 7
+- Version 6.x.x will target Capacitor 6
+- Version 2.x.x will target Capacitor 5
+- Version 1.x.x will target Capacitor 4
 - Version 0.1.3 will target the latest Capacitor version
   - Capacitor 3 is recommended for this version
-- Version 1.x.x will target Capacitor 4
-- Version 2.x.x will target Capacitor 5
-- Version 6.x.x will target Capacitor 6
 
 ## API
 
