@@ -17,11 +17,13 @@ target 'PluginTests' do
 end
 
 post_install do |installer|
-  installer.pods_project.targets.each do |target|
-    target.build_configurations.each do |config|
-      # Segment's Analytics pod uses private system headers (e.g. netinet6/in6.h)
-      # from outside its module, which newer Xcode toolchains reject by default.
-      config.build_settings['CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES'] = 'YES'
-    end
+  # SEGReachability.m imports the BSD header netinet6/in6.h without using
+  # anything from it. Newer Xcode toolchains reject the import as a private
+  # header from outside its module, so drop the dead import.
+  reachability_path = File.join(__dir__, 'Pods/Analytics/Segment/Classes/SEGReachability.m')
+  if File.exist?(reachability_path)
+    contents = File.read(reachability_path)
+    patched = contents.sub("#import <netinet6/in6.h>\n", '')
+    File.write(reachability_path, patched) if patched != contents
   end
 end
